@@ -1,0 +1,15 @@
+@import "mixins";
+
+.floatedDiv() { width: 150px; height: 100px; color: #FFF; float: left; margin: 30px; }
+
+body { background:#fff url(http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/noisy_grid.png) 0 0; }
+.test-gradient { .gradient(red,blue); .floatedDiv; }
+.test-gradient-h { .gradient-h(red,blue); .floatedDiv; }
+.test-gradient-alpha { .gradient-alpha(red,50%, blue, 50%); .floatedDiv; }
+.test-gradient-h-alpha { .gradient-h-alpha(red,50%,blue,50%); .floatedDiv; }
+.test-transparent-bg { .transparent-bg(blue,50%); .floatedDiv; }
+.test-box-rotate { .box-rotate(30); .floatedDiv; background: blue;  }
+.test-box-scale { .box-scale(1.2); .floatedDiv; background: blue; }
+.test-box-reflect { .box-reflect(); .floatedDiv; background: blue; }
+.test-box-shadow { .box-shadow(5px 5px 5px #000); .floatedDiv; background: blue; }
+.test-border-radius { .border-radius(20px 3px 50px 10px); .floatedDiv; background: blue; }

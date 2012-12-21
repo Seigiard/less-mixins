@@ -6,9 +6,8 @@
     background:     -ms-linear-gradient(top, @start, @stop);
     background:      -o-linear-gradient(top, @start, @stop);
     background:         linear-gradient(to bottom, @start, @stop);
-
-    filter: e("progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='@{start}', endColorstr='@{stop}') ");
     -ms-filter: e(" progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='@{start}', endColorstr='@{stop}') ");
+    filter: e("progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='@{start}', endColorstr='@{stop}') ");
 }
 .gradient-alpha(@start: #EEE, @start-alpha:0, @stop: #FFF, @stop-alpha:1){
     @startAlphaColour: hsla(hue(@start), saturation(@start), lightness(@start), @start-alpha);
@@ -23,19 +22,19 @@
     background:     -ms-linear-gradient(top, @startAlphaColour, @stopAlphaColour);
     background:      -o-linear-gradient(top, @startAlphaColour, @stopAlphaColour);
     background:         linear-gradient(to bottom, @startAlphaColour, @stopAlphaColour);
-    filter: e("progid:DXImageTransform.Microsoft.gradient( GradientType=0,startColorstr='@{startIeAlphaColour}', endColorstr='@{stopIeAlphaColour}' )");
     -ms-filter: e("progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='@{startIeAlphaColour}', endColorstr='@{stopIeAlphaColour}')");
+    filter: e("progid:DXImageTransform.Microsoft.gradient( GradientType=0,startColorstr='@{startIeAlphaColour}', endColorstr='@{stopIeAlphaColour}' )");
 }
 .gradient-h(@start: #EEE, @stop: #FFF) {
-    background: @start; /* Old browsers */
-    background: -moz-linear-gradient(left, @start 0%, @stop 100%);
-    background: -webkit-gradient(linear, left top, right top, color-stop(0%,@start), color-stop(100%,@stop));
-    background: -webkit-linear-gradient(left, @start 0%,@stop 100%);
-    background: -o-linear-gradient(left, @start 0%,@stop 100%);
-    background: -ms-linear-gradient(left, @start 0%,@stop 100%);
-    background: linear-gradient(left, @start 0%,@stop 100%);
-    filter: e("progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr='@{start}', endColorstr='@{stop}')");
+    background: @start;
+    background: -webkit-gradient(linear, left top, right top, from(@start), to(@stop));
+    background: -webkit-linear-gradient(left, @start, @stop);
+    background:    -moz-linear-gradient(left, @start, @stop);
+    background:     -ms-linear-gradient(left, @start, @stop);
+    background:      -o-linear-gradient(left, @start, @stop);
+    background:         linear-gradient(to left, @start, @stop);
     -ms-filter: e("progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr='@{start}', endColorstr='@{stop}')");
+    filter: e("progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr='@{start}', endColorstr='@{stop}')");
 }
 .gradient-h-alpha(@start: #EEE, @start-alpha:0%, @stop: #FFF, @stop-alpha:100%){
     @startAlphaColour: hsla(hue(@start), saturation(@start), lightness(@start), @start-alpha);
@@ -43,75 +42,86 @@
     @stopAlphaColour: hsla(hue(@stop), saturation(@stop), lightness(@stop), @stop-alpha);
     @stopIeAlphaColour: argb(@stopAlphaColour);
 
-    background: -moz-linear-gradient(left, @startAlphaColour @start-alpha, @stopAlphaColour @stop-alpha);
-    background: -webkit-gradient(linear, left top, right top, color-stop(@start-alpha,@startAlphaColour), color-stop(@stop-alpha,@stopAlphaColour));
-    background: -webkit-linear-gradient(left, @startAlphaColour @start-alpha, @stopAlphaColour @stop-alpha);
-    background: -o-linear-gradient(left, @startAlphaColour @start-alpha, @stopAlphaColour @stop-alpha);
-    background: -ms-linear-gradient(left, @startAlphaColour @start-alpha, @stopAlphaColour @stop-alpha);
-    background: linear-gradient(left, @startAlphaColour @start-alpha, @stopAlphaColour @stop-alpha);
-    filter: e("progid:DXImageTransform.Microsoft.gradient( GradientType=1,startColorstr='@{startIeAlphaColour}', endColorstr='@{stopIeAlphaColour}' )");
+    background: -webkit-gradient(linear, left top, right top, from(@startAlphaColour), to(@stopAlphaColour));
+    background: -webkit-linear-gradient(left, @startAlphaColour, @stopAlphaColour);
+    background:    -moz-linear-gradient(left, @startAlphaColour, @stopAlphaColour);
+    background:     -ms-linear-gradient(left, @startAlphaColour, @stopAlphaColour);
+    background:      -o-linear-gradient(left, @startAlphaColour, @stopAlphaColour);
+    background:         linear-gradient(to left, @startAlphaColour, @stopAlphaColour);
     -ms-filter: e("progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr='@{startIeAlphaColour}', endColorstr='@{stopIeAlphaColour}')");
+    filter: e("progid:DXImageTransform.Microsoft.gradient( GradientType=1,startColorstr='@{startIeAlphaColour}', endColorstr='@{stopIeAlphaColour}' )");
 }
 .transparent-bg(@color:#000, @opacity:.5){
     .gradient-alpha(@color, @opacity, @color, @opacity);
 }
-.rotation(@deg:5deg){
-    -webkit-transform: rotate(@deg);
-    -moz-transform: rotate(@deg);
-    -ms-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    transform: rotate(@deg);
-}
 .box-shadow(@arguments) {
     -webkit-box-shadow: @arguments;
-    -moz-box-shadow: @arguments;
-    box-shadow: @arguments;
+            box-shadow: @arguments;
 }
-.box-sizing(){
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+.box-sizing(@arg: border-box){
+    -webkit-box-sizing: @arg;
+       -moz-box-sizing: @arg;
+        -ms-box-sizing: @arg;
+            box-sizing: @arg;
 }
 .border-radius(@radius: 1px) {
     -webkit-border-radius: @radius;
-    -moz-border-radius: @radius;
-    border-radius: @radius;
-    -moz-background-clip: padding; 
+            border-radius: @radius;
     -webkit-background-clip: padding-box; 
-    background-clip: padding-box;
+       -moz-background-clip: padding; 
+            background-clip: padding-box;
 }
 .opacity(@opacity:1) {
+    -webkit-opacity: @opacity;
+     -khtml-opacity: @opacity;
+       -moz-opacity: @opacity;
+            opacity: @opacity;
+
     @freakingie: @opacity * 100;
     -ms-filter: e("progid:DXImageTransform.Microsoft.Alpha(Opacity=@{freakingie})");
     filter: e("alpha ( opacity=@{freakingie})");
-    -webkit-opacity: @opacity;
-    -khtml-opacity: @opacity;
-    -moz-opacity: @opacity;
-    opacity: @opacity;
 }
 .transition(@transition:all .2s ease .1s) {
     -webkit-transition: @transition;
-    -moz-transition: @transition;
-    -o-transition: @transition;
-    transition: @transition;
+       -moz-transition: @transition;
+         -o-transition: @transition;
+            transition: @transition;
+}
+.box-rotate(@deg:90){
+    -webkit-transform: rotate(e("@{deg}deg"));
+       -moz-transform: rotate(e("@{deg}deg"));
+        -ms-transform: rotate(e("@{deg}deg"));
+         -o-transform: rotate(e("@{deg}deg"));
+            transform: rotate(e("@{deg}deg"));
+}
+.box-scale(@ratio:1.5){
+    -webkit-transform:scale(@ratio);
+       -moz-transform:scale(@ratio);
+         -o-transform: scale(@ratio);
+            transform:scale(@ratio);
+}
+.box-reflect (@length: 50%, @opacity: 0.2){
+    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(@length, transparent), to(rgba(255,255,255,@opacity)));
+}
+.transform (@rotate: 90deg, @scale: 1, @skew: 1deg, @translate: 10px) {
+    -webkit-transform: rotate(@rotate) scale(@scale) skew(@skew) translate(@translate);
+       -moz-transform: rotate(@rotate) scale(@scale) skew(@skew) translate(@translate);
+        -ms-transform: rotate(@rotate) scale(@scale) skew(@skew) translate(@translate);
+         -o-transform: rotate(@rotate) scale(@scale) skew(@skew) translate(@translate);
+            transform: rotate(@rotate) scale(@scale) skew(@skew) translate(@translate);
 }
 .filter(@filter: sepia(100%)) {
-    filter: @filter;
     -webkit-filter: @filter; 
-    -moz-filter: @filter;
-    -ms-filter: @filter; 
-    -o-filter: @filter;
+       -moz-filter: @filter;
+        -ms-filter: @filter; 
+         -o-filter: @filter;
+            filter: @filter;
 }
 .clearfix() {
     .lt-ie8 & { overflow:hidden; }
     .lt-ie9 & { zoom: 1; display:block; overflow:hidden; }
-    &::before, &::after {
-        display: table;
-        content: "";
-    }
-    &::after {
-        clear: both;
-    }
+    &::before, &::after { display: table; content: ""; }
+    &::after { clear: both; }
 }
 .inline-block() {
     display:inline-block;
@@ -121,7 +131,8 @@
     display:table;
     .lt-ie8 & { _height: 0; zoom: 1; }
 }
-// @font-face { .font('NameOfFont','UrlToFileOfFontWithoutExtension', 'FontWeight:normal|bold', 'FontStyle:normal|italic', 'base64 encoded woff font'); }
+
+// @font-face { .font('NameOfFont','UrlToFileOfFontWithoutExtension', 'FontWeight:normal|bold', 'FontStyle:normal|italic'); }
 .font(@fontname, @fontfile, @weight: "normal", @style: "normal") {
     font-family: "@{fontname}";
     src: url("@{fontfile}.eot");    
@@ -131,6 +142,8 @@
     font-weight: e("@{weight}");
     font-style: e("@{style}");
 }
+
+// @font-face { .font-emb('NameOfFont','UrlToFileOfFontWithoutExtension', 'FontWeight:normal|bold', 'FontStyle:normal|italic', 'base64 encoded woff font'); }
 .font-emb(@fontname, @fontfile, @weight: "normal", @style: "normal", @base64) {
     font-family: "@{fontname}";
     src: url("@{fontfile}.eot");    
